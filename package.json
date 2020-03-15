@@ -1,0 +1,44 @@
+{
+  "name": "teddytags-jsx-starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js",
+    "clean": "rimraf public/*",
+    "deploy": "gh-pages -d dist",
+    "build": "npm run clean && webpack --mode production --config webpack.prod.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-transform-react-jsx": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/standalone": "^7.8.7",
+    "babel-loader": "^8.0.6",
+    "bootstrap": "^4.4.1",
+    "codemirror": "^5.52.0",
+    "compression-webpack-plugin": "^3.1.0",
+    "css-loader": "^3.4.2",
+    "file-loader": "^5.1.0",
+    "gh-pages": "^2.2.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^4.0.0-beta.11",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1",
+    "prismjs": "^1.19.0",
+    "rimraf": "^3.0.2",
+    "style-loader": "^1.1.3",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.41.6",
+    "webpack-cleanup-plugin": "^0.5.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3",
+    "workbox-webpack-plugin": "^5.0.0"
+  },
+  "dependencies": {
+    "teddytags": "^1.7.0"
+  }
+}

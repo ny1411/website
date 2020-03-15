@@ -1,0 +1,28 @@
+.content {
+  width: 100%;
+  height: calc(100vh - 56px);
+}
+.CodeMirror pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+h1.td-title{
+  font-size: calc(1.425rem + 2.1vw);
+  font-weight: 300;
+}
+h1.td-lead{
+  font-size: calc(1.275rem + .3vw);
+  font-weight: 200;
+}
+h2.td-lead{
+  font-size: calc(1.75rem + .3vw);
+  font-weight: 300;
+}
+.hero-head h1{
+  font-size: calc(2.5rem + 2.1vw);
+  font-weight: 300;
+}
+.td-light{
+  font-weight: 300;
+}
