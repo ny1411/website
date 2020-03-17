@@ -1,7 +1,9 @@
 const path = require("path");
 const pages = require("./pages.config.js").pages;
 const PUBLIC_DIR = path.join(__dirname, "public");
+const Prism = require("prismjs");
 const pagesDir = require("./pages.config.js").pageDir;
+const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 let entires = {};
 Object.keys(pages).forEach(page => {
@@ -12,10 +14,10 @@ Object.keys(pages).forEach(page => {
   html[page] = {
     title: pages[page].title,
     favicon: path.join(__dirname, "src/assets/favicon.ico"),
-    template: path.join(__dirname, pagesDir, page, pages[page].html),
+    template: path.join(__dirname, htmlDir),
     chunks: [page]
   };
-  if (/index\.(ejs|html)/.test(pages[page].html)) {
+  if (/index/.test(page)) {
     html[page].filename = path.join(PUBLIC_DIR, "index.html");
   } else {
     if (pages[page].index || pages[page].index === undefined)
@@ -56,6 +58,14 @@ module.exports = {
         use: {
           loader: "babel-loader"
         }
+      },
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: "html-loader"
+          }
+        ]
       },
       {
         test: /\.(html|htm)$/i,

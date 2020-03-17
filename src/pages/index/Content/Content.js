@@ -1,7 +1,6 @@
 import teddy from "teddytags";
 import Header from "@components/Header/Header";
 import Code from "@components/Code/Code";
-import LiveEditor from "@components/LiveEditor/LiveEditor";
 import "./Content.css";
 export default class Content extends teddy.Component {
   constructor(props) {

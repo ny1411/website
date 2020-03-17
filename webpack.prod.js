@@ -2,8 +2,10 @@ const path = require("path");
 const pages = require("./pages.config.js").pages;
 const PUBLIC_DIR = path.join(__dirname, "public");
 const pagesDir = require("./pages.config.js").pageDir;
+const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-const WorkboxPlugin = require("workbox-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin");
 let entires = {};
 Object.keys(pages).forEach(page => {
   entires[page] = path.join(__dirname, pagesDir, page, pages[page].main);
@@ -13,7 +15,7 @@ Object.keys(pages).forEach(page => {
   html[page] = {
     title: pages[page].title,
     favicon: path.join(__dirname, "src/assets/favicon.ico"),
-    template: path.join(__dirname, pagesDir, page, pages[page].html),
+    template: path.join(__dirname, htmlDir),
     chunks: [page]
   };
   if (/index\.(ejs|html)/.test(pages[page].html)) {
@@ -97,7 +99,7 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 8000,
-              name: "[name].[ext]?[hash]"
+              name: "[name].[hash].[ext]"
             }
           }
         ]
@@ -105,15 +107,33 @@ module.exports = {
     ]
   },
   optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        sourceMap: false,
+        terserOptions: {
+          mangle: true,
+          output: { comments: false }
+        }
+      })
+    ],
     splitChunks: {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
-          chunks: "all",
+          chunks: "all"
         }
       }
     }
   },
-  plugins: [...htmlpages]
+  plugins: [
+    ...htmlpages,
+    new CompressionPlugin({
+      test: /\.(js|svg|png)$/,
+      algorithm: "gzip",
+      compressionOptions: { level: 9 },
+      deleteOriginalAssets: false
+    })
+  ]
 };

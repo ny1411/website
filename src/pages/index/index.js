@@ -24,4 +24,4 @@ const render = () => {
   global.render = teddy.render;
   global.TeddyTags = teddy.TeddyTags;
 };
-render()
+render();

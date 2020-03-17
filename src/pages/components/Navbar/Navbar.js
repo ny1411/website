@@ -5,20 +5,8 @@ export default class Navbar extends teddy.Component {
     super(props);
   }
   componentDidMount(dom) {
-    let links = {
-      home: dom.querySelector(".nav-link.home"),
-      repl: dom.querySelector(".nav-link.repl")
-    };
-    switch (this.props.activeLink) {
-      case "home":
-        links.home.classList.toggle("active");
-        break;
-      case "repl":
-        links.repl.classList.toggle("active");
-        break;
-      default:
-        break;
-    }
+    let activeLink = dom.querySelector(`.main-nav .${this.props.activeLink}`);
+    activeLink.classList.toggle("active");
   }
   render() {
     return (
@@ -36,7 +24,7 @@ export default class Navbar extends teddy.Component {
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+          <ul class="main-nav navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link home" href="#">
                 Home
@@ -46,6 +34,29 @@ export default class Navbar extends teddy.Component {
               <a class="nav-link repl" href="#">
                 REPL
               </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle docs"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+              >
+                Docs
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">
+                  Action
+                </a>
+                <a class="dropdown-item" href="#">
+                  Another action
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">
+                  Something else here
+                </a>
+              </div>
             </li>
           </ul>
           <div class="form-inline justify-content-center">
