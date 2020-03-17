@@ -18,7 +18,7 @@ Object.keys(pages).forEach(page => {
     template: path.join(__dirname, htmlDir),
     chunks: [page]
   };
-  if (/index\.(ejs|html)/.test(pages[page].html)) {
+  if (/index/.test(page)) {
     html[page].filename = path.join(PUBLIC_DIR, "index.html");
   } else {
     if (pages[page].index || pages[page].index === undefined)
