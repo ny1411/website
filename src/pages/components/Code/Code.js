@@ -1,9 +1,9 @@
 import teddy from "teddytags";
 import Prism from "prismjs";
-global.Prism = Prism
-import "./oml.css"
-import "./Code.css"
-import "prismjs/themes/prism-tomorrow.css";
+global.Prism = Prism;
+import "./oml.css";
+import "./Code.css";
+import "@assets/prism-oceanic.css";
 import "prismjs/components/prism-bash";
 import "prismjs/components/prism-typescript";
 export default class Code extends teddy.Component {
@@ -38,8 +38,16 @@ export default class Code extends teddy.Component {
   }
   componentDidMount(dom) {
     let initialHTML = dom.innerHTML;
-    dom.innerHTML = '<button title="copy the code" id="copybutton">Copy</button>' + initialHTML;
+    dom.innerHTML =
+      '<button title="copy the code" id="copybutton">Copy</button>' +
+      initialHTML;
     dom.querySelectorAll("#copybutton").forEach(e => {
+      const ol = e.offsetLeft;
+      const or = e.offsetRight;
+      e.parentNode.addEventListener("wheel", () => {
+        e.offsetLeft = ol;
+        e.offsetRight = or;
+      });
       e.addEventListener("click", () => {
         let code = e.nextSibling;
         this.CopyToClipboard(code);
@@ -48,8 +56,8 @@ export default class Code extends teddy.Component {
   }
   render() {
     return (
-      <pre class={`language-${this.props.lang}`} style="position: relative;" >
-        <code >{this.props.code}</code>
+      <pre class={`language-${this.props.lang}`} style="position: relative;">
+        <code>{this.props.code}</code>
       </pre>
     );
   }

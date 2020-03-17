@@ -138,8 +138,9 @@ module.exports = {
   plugins: [
     ...htmlpages,
     new CompressionPlugin({
-      test: /\.(js|svg|png)$/,
+      test: /\.(js)$/,
       algorithm: "gzip",
+      minRatio: Number.MAX_SAFE_INTEGER, // Compress everything
       compressionOptions: { level: 9 },
       deleteOriginalAssets: false
     })

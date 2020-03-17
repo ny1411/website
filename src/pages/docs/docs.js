@@ -3,6 +3,10 @@ import Navbar from "@components/Navbar/Navbar";
 import teddy, { Component } from "teddytags";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@assets/icons.css";
+import tocbot from "tocbot";
+import AnchorJS from "anchor-js";
+import "tocbot/dist/tocbot.css";
+import "./docs.css";
 import "bootstrap/dist/js/bootstrap";
 import doc from "./docs.md";
 class App extends Component {
@@ -48,14 +52,38 @@ class App extends Component {
         });
       });
     });
+    const anchors = new AnchorJS({
+      placement: "right",
+      icon: "#",
+      class: "nav-link text-secondary d-inline"
+    });
+    anchors.add(".content h1");
+    anchors.add(".content h2");
+    anchors.add(".content h3");
+    tocbot.init({
+      // Where to render the table of contents.
+      tocSelector: ".toc",
+      // Where to grab the headings to build the table of contents.
+      contentSelector: ".content",
+      // Which headings to grab inside of the contentSelector element.
+      headingSelector: "h1, h2, h3",
+      // For headings inside relative or absolute positioned containers within content.
+      hasInnerContainers: true
+    });
   }
   render() {
     return (
       <main>
         <Navbar activeLink="docs" />
-        <div class="px-3 py-2">
-          <Markdown text={doc} />
-        </div>
+        <article>
+          <div style="width: 88%" class="float-left content px-3 py-2">
+            <Markdown text={doc} />
+          </div>
+          <div
+            style="right: 0; width: 12%"
+            class="toc position-fixed pt-2 d-none d-md-block"
+          ></div>
+        </article>
       </main>
     );
   }

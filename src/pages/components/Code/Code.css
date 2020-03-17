@@ -1,29 +1,31 @@
 .sh {
   display: none;
 }
-code.language-shell-session::before {
+code.language-shell-session::before, code.language-bash::before {
   content: "$";
   left: 0;
   margin-right: 1ch;
   color: greenyellow;
 }
-code[class*=language-]{
-  font-family: 'oml' !important;
+code[class*="language-"] {
+  font-family: "oml" !important;
 }
-pre[class*=language-]{
+pre[class*="language-"] {
   position: relative;
   border-radius: 3px;
   word-wrap: break-word;
 }
 #copybutton {
   position: absolute;
+  overflow: auto;
+  right: 0;
+  top: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   border: 0px transparent;
   font-size: 0.725rem;
   padding: 3px;
   margin-right: 10px;
-  right: 0;
   border-radius: 5px;
   background-color: #ebebeb81;
   opacity: 0.15;

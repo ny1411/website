@@ -1,6 +1,6 @@
 import teddy from "teddytags";
 import Prism from "prismjs";
-import "prismjs/themes/prism-tomorrow.css";
+import "@assets/prism-oceanic.css";
 import "./Code.css";
 import "./Markdown.css";
 import "./oml.css";

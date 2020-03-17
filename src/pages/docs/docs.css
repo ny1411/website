@@ -1,0 +1,3 @@
+.is-active-link::before {
+  background-color: #343a40 !important;
+}
