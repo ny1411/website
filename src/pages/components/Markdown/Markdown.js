@@ -1,9 +1,9 @@
 import teddy from "teddytags";
 import Prism from "prismjs";
 import "@assets/prism-oceanic.css";
-import "./Code.css";
+import "@components/Code/Code.css";
 import "./Markdown.css";
-import "./oml.css";
+import "@assets/oml.css";
 import "prismjs/components/prism-typescript";
 import "prismjs/components/prism-bash";
 import "prismjs/components/prism-diff";

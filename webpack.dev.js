@@ -1,9 +1,10 @@
 const path = require("path");
 const pages = require("./pages.config.js").pages;
 const PUBLIC_DIR = path.join(__dirname, "public");
-const Prism = require("prismjs");
 const pagesDir = require("./pages.config.js").pageDir;
 const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
+const blogs = require("./src/pages/blog/make");
+const docs = require("./src/pages/docs/make");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 let entires = {};
 Object.keys(pages).forEach(page => {
@@ -32,7 +33,11 @@ Object.keys(pages).forEach(page => {
 let htmlpages = [];
 Object.keys(html).forEach(h => htmlpages.push(new HtmlWebpackPlugin(html[h])));
 module.exports = {
-  entry: entires,
+  entry: {
+    ...entires,
+    blog: "./src/pages/blog/blog.js",
+    docs: "./src/pages/docs/docs.js"
+  },
   mode: "development",
   output: {
     filename: "[name].bundle.js",
@@ -105,14 +110,15 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 8000,
-              name: "[name].[ext]"
+              name: "[name].[ext]",
+              publicPath: '../'
             }
           }
         ]
       }
     ]
   },
-  plugins: htmlpages,
+  plugins: [...htmlpages, ...blogs, ...docs],
   devServer: {
     contentBase: PUBLIC_DIR,
     compress: true,

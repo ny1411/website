@@ -1,4 +1,5 @@
 import teddy from "teddytags";
+import "@assets/icons.css"
 import "./Navbar.css";
 export default class Navbar extends teddy.Component {
   constructor(props) {
@@ -27,18 +28,18 @@ export default class Navbar extends teddy.Component {
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="main-nav navbar-nav mr-auto">
               <li class="nav-item">
-                <a class="nav-link home" href={window.location.origin}>
+                <a class="nav-link home" href="/">
                   Home
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link repl" href={window.location.origin+"/repl"}>
+                <a class="nav-link repl" href="/repl">
                   REPL
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link docs" href={window.location.origin+"/docs"}>
-                  Documentation
+                <a class="nav-link docs" href="/docs">
+                  Docs
                 </a>
               </li>
             </ul>

@@ -3,9 +3,13 @@ const pages = require("./pages.config.js").pages;
 const PUBLIC_DIR = path.join(__dirname, "public");
 const pagesDir = require("./pages.config.js").pageDir;
 const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
+const blogs = require("./src/pages/blog/make");
+const docs = require("./src/pages/docs/make");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const CnameWebpackPlugin = require("cname-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 let entires = {};
 Object.keys(pages).forEach(page => {
   entires[page] = path.join(__dirname, pagesDir, page, pages[page].main);
@@ -33,7 +37,11 @@ Object.keys(pages).forEach(page => {
 let htmlpages = [];
 Object.keys(html).forEach(h => htmlpages.push(new HtmlWebpackPlugin(html[h])));
 module.exports = {
-  entry: entires,
+  entry: {
+    ...entires,
+    blog: "./src/pages/blog/blog.js",
+    docs: "./src/pages/docs/docs.js"
+  },
   mode: "production",
   output: {
     filename: "[name][hash].bundle.js",
@@ -95,7 +103,7 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 8000,
-              name: "[name].[ext]?[hash]"
+              name: "[name].[hash].[ext]"
             }
           }
         ]
@@ -137,8 +145,14 @@ module.exports = {
   },
   plugins: [
     ...htmlpages,
+    ...blogs,
+    ...docs,
+    new CnameWebpackPlugin({
+      domain: "teddy.js.org"
+    }),
+     new BundleAnalyzerPlugin(),
     new CompressionPlugin({
-      test: /\.(js)$/,
+      test: /\.(js|jpg|png)$/,
       algorithm: "gzip",
       minRatio: Number.MAX_SAFE_INTEGER, // Compress everything
       compressionOptions: { level: 9 },
