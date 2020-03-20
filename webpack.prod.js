@@ -10,6 +10,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const CnameWebpackPlugin = require("cname-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const {GenerateSW} = require('workbox-webpack-plugin');
 let entires = {};
 Object.keys(pages).forEach(page => {
   entires[page] = path.join(__dirname, pagesDir, page, pages[page].main);
@@ -150,13 +151,14 @@ module.exports = {
     new CnameWebpackPlugin({
       domain: "teddy.js.org"
     }),
-     new BundleAnalyzerPlugin(),
+    //  new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       test: /\.(js|jpg|png)$/,
       algorithm: "gzip",
       minRatio: Number.MAX_SAFE_INTEGER, // Compress everything
       compressionOptions: { level: 9 },
       deleteOriginalAssets: false
-    })
+    }),
+    new GenerateSW()
   ]
 };

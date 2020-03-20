@@ -1,7 +1,7 @@
 import teddy, { Component } from "teddytags";
 import Content from "./Content/Content";
 import Navbar from "@components/Navbar/Navbar";
-import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
 import "@assets/icons.css";
 import "bootstrap/dist/js/bootstrap";
 class App extends Component {
@@ -25,3 +25,8 @@ const render = () => {
   global.TeddyTags = teddy.TeddyTags;
 };
 render();
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js");
+  });
+}
