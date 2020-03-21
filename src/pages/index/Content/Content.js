@@ -11,40 +11,55 @@ export default class Content extends teddy.Component {
       <article class="content">
         <Header />
         <div class="pl-5 pr-5">
-          <h1 class="td-title">Setup</h1>
+          <h1 class="td-title">Your DOM has got its best friend ever.</h1>
+          <br />
+          <h2 class="td-lead">DOM's sidekick</h2>
+          <p class="lead">
+            TeddyTags is like a minimal wrapper on the DOM. It just processes
+            all the things you give and then lets the DOM to do its own magic.
+          </p>
           <hr />
-          <div class="container-fluid">
-            <h2 class="td-lead">Browser</h2>
-            TeddyTags is hosted by CDNs like jsDelivr and UNPKG.
-            <hr />
-            <h3 class="td-light">To use the UMD module (no ESM)</h3>
+          <h2 class="td-lead">Light on Performance</h2>
+          <p class="lead">
+            The whole package consists just 6KB minified JavaScript which can be
+            plugged anywhere, in the browser or in node*.
+          </p>
+          <hr />
+          <h2 class="td-lead">Minimal and expressive</h2>
+          <p class="lead">
+            TeddyTags has an API which looks minimal but is expressive. Think
+            big, but write small.
+          </p>
+          <ul>
+            <li class="lead">Defining a custom element</li>
             <Code
-              lang="html"
-              code={`<script src='https://unpkg.com/teddytags@latest/lib/legacy.js'></script>`}
-            />
-            All the exports are named under one variable i.e TeddyTags The
-            default export can be destructed like this:
+              lang="js"
+              code="new TeddyTags('myCustomElement').set('h1')"
+            ></Code>
+            <li class="lead">Defining an awesome Component</li>
             <Code
-              lang="javascript"
-              code={`const {h, render, TeddyTags, Component} = TeddyTags`}
-            />
-            <hr />
-            <h3 class="td-light">To use the ES Module</h3>
-            <Code
-              lang="javascript"
+              lang="jsx"
               code={[
-                "//named import",
-                'import {h, Component, TeddyTags, render} from "https://unpkg.com/teddytags@latest/lib/teddytags.js"',
-                "//default import",
-                'import teddy from "https://unpkg.com/teddytags@latest/lib/teddytags.js"'
+                "class MyComponent extends Component{",
+                "   constructor(props){",
+                "     super(props)",
+                "   }",
+                "   render(){",
+                "     return (",
+                "       <h1>Hello, Component!</h1>",
+                "     )",
+                "   }",
+                " }"
               ].join("\n")}
-            />
-          </div>
-          <div class="container-fluid">
-            <h2 class="td-lead">NPM</h2>
-            Run the following command
-            <Code lang="shell-session" code="npm install teddytags" />
-          </div>
+            ></Code>
+          </ul>
+          <h1 class="td-title">Ready to take over the world??</h1>
+          <p class="lead">
+            Head straight to the{" "}
+            <a href="/docs/getting-started">Getting Started</a> section or get
+            your hands dirty by playing with TeddyTags in the{" "}
+            <a href="/repl">REPL</a>.
+          </p>
         </div>
       </article>
     );

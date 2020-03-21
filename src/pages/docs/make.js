@@ -2,9 +2,12 @@ const path = require("path");
 const fs = require("fs");
 const marked = require("marked");
 const Prism = require("prismjs");
-const DOCSDIR = path.join(__dirname, "./md")
+const DOCSDIR = path.join(__dirname, "./md");
 require("prismjs/components/prism-typescript");
+require("prismjs/components/prism-jsx");
+require("prismjs/components/prism-tsx");
 require("prismjs/components/prism-bash");
+require("prismjs/components/prism-shell-session");
 require("prismjs/components/prism-diff");
 marked.setOptions({
   highlight: (code, lang) => {
@@ -13,16 +16,27 @@ marked.setOptions({
       return html;
     }
     const html = Prism.highlight(code, Prism.languages[lang], lang);
-    return `<pre>${html}</pre>`;
+    return html;
   }
 });
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const makeConfigObj = f => {
   const html = marked.parse(fs.readFileSync(f, "utf-8"));
-  const filename = path.join("docs", path.relative(DOCSDIR, f).replace(/\.md$/, ""), "index.html");
+  let filename = f.endsWith("index.md")
+    ? path.join("docs", path.relative(DOCSDIR, f).replace(/\.md$/, ".html"))
+    : path.join(
+        "docs",
+        path
+          .relative(DOCSDIR, f)
+          .replace(/\.md$/, "")
+          .toLowerCase(),
+        "index.html"
+      );
   return new HtmlWebpackPlugin({
     template: path.join(__dirname, "./docs.ejs"),
-    title: path.basename(f, ".md"),
+    title: f.endsWith("index.md")
+      ? "TeddyTags Docs"
+      : "Docs - " + path.basename(f, ".md").replace(/-/g, " "),
     filename: filename,
     chunks: ["docs"],
     bodyHTML: html

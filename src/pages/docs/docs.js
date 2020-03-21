@@ -1,9 +1,7 @@
 import teddy from "teddytags";
-import Prism from "prismjs";
 import tocbot from "tocbot";
 import "tocbot/dist/tocbot.css";
 import AnchorJS from "anchor-js";
-global.Prism = Prism;
 import "@assets/prism-oceanic.css";
 import "@assets/oml.css";
 import "bootstrap";

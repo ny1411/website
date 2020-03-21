@@ -5,6 +5,7 @@ import "@assets/oml.css";
 import "./Code.css";
 import "@assets/prism-oceanic.css";
 import "prismjs/components/prism-bash";
+import "prismjs/components/prism-jsx";
 import "prismjs/components/prism-typescript";
 export default class Code extends teddy.Component {
   constructor(props) {

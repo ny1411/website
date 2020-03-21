@@ -3,25 +3,36 @@ const fs = require("fs");
 const marked = require("marked");
 const Prism = require("prismjs");
 require("prismjs/components/prism-typescript");
+require("prismjs/components/prism-jsx");
+require("prismjs/components/prism-tsx");
 require("prismjs/components/prism-bash");
+require("prismjs/components/prism-shell-session");
 require("prismjs/components/prism-diff");
 marked.setOptions({
   highlight: (code, lang) => {
     if (!lang) {
       const html = Prism.highlight(code, Prism.languages.markup, "markup");
-      return `<pre>${html}</pre>`;
+      return html;
     }
     const html = Prism.highlight(code, Prism.languages[lang], lang);
-    return `<pre>${html}</pre>`;
+    return html;
   }
 });
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const makeConfigObj = f => {
   const html = marked.parse(fs.readFileSync(f, "utf-8"));
-  const filename = path.join("blog", path.relative(__dirname, f).replace(/\.md$/, ""), "index.html");
+  const filename =
+    f === "index.md"
+      ? path.join("blog", path.relative(__dirname, f).replace(/\.md$/, ".html"))
+      : path.join(
+          "blog",
+          path.relative(__dirname, f).replace(/\.md$/, ""),
+          "index.html"
+        );
   return new HtmlWebpackPlugin({
     template: path.join(__dirname, "./blog.ejs"),
-    title: path.basename(f, ".md"),
+    title:
+      f === "index.md" ? "TeddyTags Blog" : "Blog- " + path.basename(f, ".md"),
     filename: filename,
     chunks: ["blog"],
     bodyHTML: html

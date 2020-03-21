@@ -1,10 +1,10 @@
-@font-face{
-    font-family: 'oml';
-    src: url("./fonts/OperatorMonoLig-Light.otf");
-    font-style: normal;
+@font-face {
+  font-family: "oml";
+  src: url("fonts/oml.otf");
+  font-style: normal;
 }
-@font-face{
-    font-family: 'oml';
-    src: url("./fonts/OperatorMonoLig-LightItalic.otf");
-    font-style: italic;
+@font-face {
+  font-family: "oml";
+  src: url("fonts/omll.otf");
+  font-style: italic;
 }

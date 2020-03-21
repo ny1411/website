@@ -6,11 +6,12 @@ const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
 const blogs = require("./src/pages/blog/make");
 const docs = require("./src/pages/docs/make");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const CnameWebpackPlugin = require("cname-webpack-plugin");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const {GenerateSW} = require('workbox-webpack-plugin');
+const { GenerateSW } = require("workbox-webpack-plugin");
 let entires = {};
 Object.keys(pages).forEach(page => {
   entires[page] = path.join(__dirname, pagesDir, page, pages[page].main);
@@ -88,13 +89,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          "style-loader",
           {
-            loader: "css-loader",
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              modules: false
+              publicPath: "../../",
             }
-          }
+          },
+          "css-loader"
         ]
       },
       {
@@ -104,7 +105,8 @@ module.exports = {
             loader: "url-loader",
             options: {
               limit: 8000,
-              name: "[name].[hash].[ext]"
+              name: "[name].[hash].[ext]",
+              outputPath : "assets/images/"
             }
           }
         ]
@@ -115,8 +117,9 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 8000,
-              name: "[name].[hash].[ext]"
+              limit: 1024 * 8,
+              name: "[name].[hash].[ext]",
+              outputPath: "assets/fonts/"
             }
           }
         ]
@@ -148,10 +151,11 @@ module.exports = {
     ...htmlpages,
     ...blogs,
     ...docs,
+    new MiniCssExtractPlugin({filename: "assets/css/[name].css"}),
     new CnameWebpackPlugin({
       domain: "teddy.js.org"
     }),
-    //  new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       test: /\.(js|jpg|png)$/,
       algorithm: "gzip",
