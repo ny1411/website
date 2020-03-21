@@ -48,7 +48,7 @@ pre > code[class*="language-"] {
 	background: none;
 }
 
-pre[class*="language-"] {
+pre[class*="language-"], pre {
 	overflow: auto;
 	position: relative;
 	color: #c3cee3;

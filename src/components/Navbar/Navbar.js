@@ -1,5 +1,7 @@
 import teddy from "teddytags";
-import "@assets/icons.css"
+// const docsearch = require("docsearch.js");
+// import "docsearch.js/dist/cdn/docsearch.css";
+import "@assets/icons.css";
 import "./Navbar.css";
 export default class Navbar extends teddy.Component {
   constructor(props) {
@@ -8,6 +10,19 @@ export default class Navbar extends teddy.Component {
   componentDidMount(dom) {
     let activeLink = dom.querySelector(`.main-nav .${this.props.activeLink}`);
     activeLink.classList.toggle("active");
+    document.addEventListener("DOMContentLoaded", () => {
+      // docsearch({
+      //   // Your apiKey and indexName will be given to you once
+      //   // we create your config
+      //   apiKey: "25626fae796133dc1e734c6bcaaeac3c",
+      //   indexName: "docsearch",
+      //   // Replace inputSelector with a CSS selector
+      //   // matching your search input
+      //   inputSelector: "#search-bar",
+      //   // Set debug to true if you want to inspect the dropdown
+      //   debug: false
+      // });
+    });
   }
   render() {
     return (
@@ -37,15 +52,28 @@ export default class Navbar extends teddy.Component {
                   REPL
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link docs" href="/docs">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle docs"
+                  href="#"
+                  data-toggle="dropdown"
+                >
                   Docs
                 </a>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="/docs/getting-started">
+                    Getting Started
+                  </a>
+                  <a class="dropdown-item" href="/docs/api">
+                    API
+                  </a>
+                </div>
               </li>
             </ul>
             <div class="form-inline justify-content-center">
               <div class="input-group">
                 <input
+                  id="search-bar"
                   class="form-control border border-light"
                   type="search"
                   placeholder="Search"
