@@ -1,4 +1,6 @@
 import teddy from "teddytags";
+import docsearch from "docsearch.js";
+import "docsearch.js/dist/cdn/docsearch.css";
 import tocbot from "tocbot";
 import "tocbot/dist/tocbot.css";
 import AnchorJS from "anchor-js";
@@ -72,5 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
     headingSelector: "h1, h2, h3",
     // For headings inside relative or absolute positioned containers within content.
     hasInnerContainers: true
+  });
+  docsearch({
+    apiKey: "2eb478ca5883df99298c859f13049c88",
+    indexName: "teddy",
+    inputSelector: "#search-bar",
+    debug: false
   });
 });

@@ -1,6 +1,6 @@
 import teddy from "teddytags";
-// const docsearch = require("docsearch.js");
-// import "docsearch.js/dist/cdn/docsearch.css";
+const docsearch = require("docsearch.js");
+import "docsearch.js/dist/cdn/docsearch.css";
 import "@assets/icons.css";
 import "./Navbar.css";
 export default class Navbar extends teddy.Component {
@@ -11,17 +11,12 @@ export default class Navbar extends teddy.Component {
     let activeLink = dom.querySelector(`.main-nav .${this.props.activeLink}`);
     activeLink.classList.toggle("active");
     document.addEventListener("DOMContentLoaded", () => {
-      // docsearch({
-      //   // Your apiKey and indexName will be given to you once
-      //   // we create your config
-      //   apiKey: "25626fae796133dc1e734c6bcaaeac3c",
-      //   indexName: "docsearch",
-      //   // Replace inputSelector with a CSS selector
-      //   // matching your search input
-      //   inputSelector: "#search-bar",
-      //   // Set debug to true if you want to inspect the dropdown
-      //   debug: false
-      // });
+      docsearch({
+        apiKey: "2eb478ca5883df99298c859f13049c88",
+        indexName: "teddy",
+        inputSelector: "#search-bar",
+        debug: true
+      });
     });
   }
   render() {
@@ -70,25 +65,23 @@ export default class Navbar extends teddy.Component {
                 </div>
               </li>
             </ul>
-            <div class="form-inline justify-content-center">
-              <div class="input-group">
-                <input
-                  id="search-bar"
-                  class="form-control border border-light"
-                  type="search"
-                  placeholder="Search"
-                />
-                <div class="input-group-append">
-                  <button class="btn btn-outline-light" type="submit">
-                    Go
-                  </button>
+            <div class="input-group justify-content-center">
+              <div class="input-group-prepend">
+                <div class="btn-light">
+                  <i class="lead icon-search"></i>
                 </div>
               </div>
+              <input
+                id="search-bar"
+                class="form-control border border-light"
+                type="search"
+                placeholder="Search"
+              />
             </div>
             <ul class="navbar-nav flex-row ml-auto justify-content-start px-2 py-2">
               <li class="nav-item px-2">
                 <a
-                  class="text-light"
+                  class="text-light text-decoration-none"
                   href="https://github.com/teddytags/teddytags"
                 >
                   <i class="lead icon-github"></i>
@@ -96,10 +89,18 @@ export default class Navbar extends teddy.Component {
               </li>
               <li class="nav-item px-2">
                 <a
-                  class="text-danger"
+                  class="text-danger text-decoration-none"
                   href="https://npmjs.com/package/teddytags"
                 >
                   <i class="lead icon-npm"></i>
+                </a>
+              </li>
+              <li class="nav-item px-2">
+                <a
+                  class="text-primary text-decoration-none"
+                  href="https://yarnpkg.com/package/teddytags"
+                >
+                  <i class="lead icon-yarn"></i>
                 </a>
               </li>
             </ul>

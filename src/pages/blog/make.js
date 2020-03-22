@@ -2,6 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const marked = require("marked");
 const Prism = require("prismjs");
+const BLOGSDIR = path.join(__dirname, "./md");
 require("prismjs/components/prism-typescript");
 require("prismjs/components/prism-jsx");
 require("prismjs/components/prism-tsx");
@@ -21,18 +22,21 @@ marked.setOptions({
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const makeConfigObj = f => {
   const html = marked.parse(fs.readFileSync(f, "utf-8"));
-  const filename =
-    f === "index.md"
-      ? path.join("blog", path.relative(__dirname, f).replace(/\.md$/, ".html"))
-      : path.join(
-          "blog",
-          path.relative(__dirname, f).replace(/\.md$/, ""),
-          "index.html"
-        );
+  let filename = f.endsWith("index.md")
+    ? path.join("blog", path.relative(BLOGSDIR, f).replace(/\.md$/, ".html"))
+    : path.join(
+        "blog",
+        path
+          .relative(BLOGSDIR, f)
+          .replace(/\.md$/, "")
+          .toLowerCase(),
+        "index.html"
+      );
   return new HtmlWebpackPlugin({
     template: path.join(__dirname, "./blog.ejs"),
-    title:
-      f === "index.md" ? "TeddyTags Blog" : "Blog- " + path.basename(f, ".md"),
+    title: f.endsWith("index.md")
+      ? "TeddyTags Blog"
+      : "Blog - " + path.basename(f, ".md").replace(/-/g, " "),
     filename: filename,
     chunks: ["blog"],
     bodyHTML: html
@@ -55,4 +59,4 @@ const makeConfig = dir => {
   walk(dir, callback);
   return config;
 };
-module.exports = makeConfig(__dirname);
+module.exports = makeConfig(BLOGSDIR);
