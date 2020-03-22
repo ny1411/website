@@ -65,19 +65,17 @@ export default class Navbar extends teddy.Component {
                 </div>
               </li>
             </ul>
-            <div class="input-group justify-content-center">
-              <div class="input-group-prepend">
-                <div class="btn-light">
-                  <i class="lead icon-search"></i>
+              <div class="input-group justify-content-center">
+                <div class="input-group-prepend">
+                    <i class="input-group-text bg-light lead icon-search"></i>
                 </div>
+                <input
+                  id="search-bar"
+                  class="form-control border border-light"
+                  type="search"
+                  placeholder="Search"
+                />
               </div>
-              <input
-                id="search-bar"
-                class="form-control border border-light"
-                type="search"
-                placeholder="Search"
-              />
-            </div>
             <ul class="navbar-nav flex-row ml-auto justify-content-start px-2 py-2">
               <li class="nav-item px-2">
                 <a
@@ -97,7 +95,7 @@ export default class Navbar extends teddy.Component {
               </li>
               <li class="nav-item px-2">
                 <a
-                  class="text-primary text-decoration-none"
+                  class="text-info text-decoration-none"
                   href="https://yarnpkg.com/package/teddytags"
                 >
                   <i class="lead icon-yarn"></i>

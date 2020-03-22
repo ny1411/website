@@ -1,10 +1,10 @@
 @font-face {
   font-family: "oml";
-  src: url("fonts/oml.otf");
+  src: url("~@assets/fonts/oml.otf");
   font-style: normal;
 }
 @font-face {
   font-family: "oml";
-  src: url("fonts/omll.otf");
+  src: url("~@assets/fonts/omll.otf");
   font-style: italic;
 }
