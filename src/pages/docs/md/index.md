@@ -5,4 +5,4 @@ Head over to the topics you need:
 
 ## [Getting Started](./getting-started)
 
-## [API](./API)
+## [API](./api)
