@@ -96,7 +96,7 @@ export default class Navbar extends teddy.Component {
               <li class="nav-item px-2">
                 <a
                   class="text-info text-decoration-none"
-                  href="https://yarnpkg.com/package/teddytags"
+                  href="https://yarn.pm/teddytags"
                 >
                   <i class="lead icon-yarn"></i>
                 </a>
