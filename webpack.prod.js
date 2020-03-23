@@ -5,6 +5,7 @@ const pagesDir = require("./pages.config.js").pageDir;
 const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
 const blogs = require("./src/pages/blog/make");
 const docs = require("./src/pages/docs/make");
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -152,6 +153,7 @@ module.exports = {
     ...blogs,
     ...docs,
     new MiniCssExtractPlugin({filename: "assets/css/[name].css"}),
+    new OptimizeCssAssetsPlugin(),
     new CnameWebpackPlugin({
       domain: "teddy.js.org"
     }),

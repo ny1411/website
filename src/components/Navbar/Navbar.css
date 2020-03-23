@@ -6,7 +6,9 @@
   border-color: #f8f9fa !important;
   box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.25) !important;
 }
-
+.bg-teddy {
+  background-color: #743c1b;
+}
 @media (min-width: 768px) {
   .algolia-autocomplete .ds-dropdown-menu {
     width: 500px !important;
@@ -44,9 +46,4 @@
 .algolia-autocomplete .algolia-docsearch-suggestion--highlight {
   padding: 0 !important;
   color: #743c1b;
-}
-.algolia-autocomplete .algolia-docsearch-footer {
-  width: 100% !important;
-  border-top: 1px solid var(--dark);
-  content: "Search by Algolia";
 }

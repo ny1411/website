@@ -2,13 +2,6 @@ body {
   color: #444;
 }
 
-img {
-  border-radius: 5px;
-  height: 200px;
-  margin: 0 auto;
-  width: 200px;
-}
-
 a,
 a:visited {
   color: #3498db;

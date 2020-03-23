@@ -3,6 +3,7 @@ const docsearch = require("docsearch.js");
 import "docsearch.js/dist/cdn/docsearch.css";
 import "@assets/icons.css";
 import "./Navbar.css";
+import smallLogo from "@assets/small-white-logo.svg"
 export default class Navbar extends teddy.Component {
   constructor(props) {
     super(props);
@@ -22,8 +23,9 @@ export default class Navbar extends teddy.Component {
   render() {
     return (
       <nav>
-        <nav class="navbar site-header fixed-top navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="#">
+        <nav class="navbar site-header fixed-top navbar-expand-lg navbar-dark bg-teddy">
+          <a class="navbar-brand" href="https://teddy.js.org">
+            <img height="50" src={smallLogo} alt="#" />
             TeddyTags
           </a>
           <button
@@ -65,7 +67,7 @@ export default class Navbar extends teddy.Component {
                 </div>
               </li>
             </ul>
-              <div class="input-group justify-content-center">
+              <div class="input-group justify-content-md-end">
                 <div class="input-group-prepend">
                     <i class="input-group-text bg-light lead icon-search"></i>
                 </div>
@@ -104,7 +106,7 @@ export default class Navbar extends teddy.Component {
             </ul>
           </div>
         </nav>
-        <div class="mt-5 pt-2"></div>
+        <div class="mt-5 pt-3"></div>
       </nav>
     );
   }
