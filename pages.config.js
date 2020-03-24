@@ -7,9 +7,9 @@ module.exports = {
       main: "index.js",
       title: "TeddyTags"
     },
-    docs: {
-      main: "docs.js",
-      title: "TeddyTags - Documentation"
+    repl: {
+      main: "repl.js",
+      title: "TeddyTags REPL"
     },
   }
 }

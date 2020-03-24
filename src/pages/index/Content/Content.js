@@ -2,9 +2,29 @@ import teddy from "teddytags";
 import Header from "@components/Header/Header";
 import Code from "@components/Code/Code";
 import "./Content.css";
+import AnchorJS from "anchor-js";
 export default class Content extends teddy.Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount(dom) {
+    document.addEventListener("DOMContentLoaded", () => {
+      const anchors = new AnchorJS({
+        placement: "right",
+        icon: "#",
+        class: "nav-link text-secondary d-inline"
+      });
+      anchors.add(".content h1");
+      anchors.add(".content h2");
+      anchors.add(".content h3");
+      fetch("https://api.npmjs.org/downloads/point/last-day/teddytags").then(
+        res => {
+          res.json().then(data => {
+            dom.querySelector("span.npm-count").innerHTML = data.downloads;
+          });
+        }
+      );
+    });
   }
   render() {
     return (
@@ -21,7 +41,7 @@ export default class Content extends teddy.Component {
           <hr />
           <h2 class="td-lead">Light on Performance</h2>
           <p class="lead">
-            The whole package consists just 6KB minified JavaScript which can be
+            The whole package consists just 1.5KB minified + gzipped JavaScript which can be
             plugged anywhere, in the browser or in node*.
           </p>
           <hr />
@@ -53,6 +73,12 @@ export default class Content extends teddy.Component {
               ].join("\n")}
             ></Code>
           </ul>
+          <hr />
+          <h1 class="td-title">Statistics</h1>
+          <p class="td-lead stats">
+            TeddyTags has been downloaded <span class="npm-count"></span> times
+            today from NPM.
+          </p>
           <h1 class="td-title">Ready to take over the world??</h1>
           <p class="lead">
             Head straight to the{" "}
