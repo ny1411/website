@@ -5,7 +5,7 @@ const pagesDir = require("./pages.config.js").pageDir;
 const htmlDir = path.join(pagesDir, require("./pages.config.js").html);
 const blogs = require("./src/pages/blog/make");
 const docs = require("./src/pages/docs/make");
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -23,6 +23,7 @@ Object.keys(pages).forEach(page => {
     title: pages[page].title,
     favicon: path.join(__dirname, "src/assets/favicon.ico"),
     template: path.join(__dirname, htmlDir),
+    inject: 'body',
     chunks: [page]
   };
   if (/index/.test(page)) {
@@ -93,7 +94,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../../",
+              publicPath: "../../"
             }
           },
           "css-loader"
@@ -107,7 +108,7 @@ module.exports = {
             options: {
               limit: 8000,
               name: "[name].[hash].[ext]",
-              outputPath : "assets/images/"
+              outputPath: "assets/images/"
             }
           }
         ]
@@ -141,9 +142,24 @@ module.exports = {
     splitChunks: {
       cacheGroups: {
         vendor: {
-          test: /[\\/]node_modules[\\/]/,
+          test(mod /* , chunk */) {
+            if (!mod.context.includes("node_modules")) {
+              return false;
+            }
+            if (["@babel"].some(str => mod.context.includes(str))) {
+              return false;
+            }
+            return true;
+          },
           name: "vendors",
           chunks: "all"
+        },
+        babel: {
+          test: /[\\/]node_modules[\\/](@babel\/standalone)[\\/]/,
+          name: "babel",
+          chunks(chunk) {
+            return chunk.name === "repl";
+          }
         }
       }
     }
@@ -152,12 +168,12 @@ module.exports = {
     ...htmlpages,
     ...blogs,
     ...docs,
-    new MiniCssExtractPlugin({filename: "assets/css/[name].css"}),
+    new MiniCssExtractPlugin({ filename: "assets/css/[name].css" }),
     new OptimizeCssAssetsPlugin(),
     new CnameWebpackPlugin({
       domain: "teddy.js.org"
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new CompressionPlugin({
       test: /\.(js|jpg|png)$/,
       algorithm: "gzip",

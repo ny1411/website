@@ -1,7 +1,7 @@
 import teddy from "teddytags";
 import Editor from "@components/Editor/Editor";
 import Navbar from "@components/Navbar/Navbar";
-import { transform } from "@babel/standalone";
+import { transform } from "@babel/standalone/babel.min.js";
 import "bootstrap";
 import "./repl.css";
 import "@assets/oml.css";
@@ -126,7 +126,7 @@ class REPL extends teddy.Component {
               </div>
             </div>
           </div>
-          <div class="col-md-6 h-100">
+          <div class="outputs col-md-6 h-100">
             <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a

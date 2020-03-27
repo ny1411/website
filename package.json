@@ -52,6 +52,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "teddytags": "^1.7.0"
+    "teddytags": "^1.9.0"
   }
 }
